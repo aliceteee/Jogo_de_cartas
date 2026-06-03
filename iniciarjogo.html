@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jogo - Pedra Papel Tesoura Lagarto Spock</title>
+  <link rel="stylesheet" href="style-game.css">
+</head>
+<body>
+  <header class="introducao">
+    <img src="./imagens/logo.png" alt="Logo" class="logo">
+    <div class="placar">
+      <h2 class="score">Pontos</h2>
+      <p class="pontuacao">0</p>
+    </div>
+  </header>
+
+  <main class="jogo">
+    <div class="container conteiner-pedra" onclick="jogar(pedra)">
+      <button value="pedra" class="pedra opcao">
+        <img src="./imagens/pedra.png" alt="Pedra">
+      </button>
+    </div>
+
+    <div class="container conteiner-tesoura" onclick="jogar(tesoura)">
+      <button value="tesoura" class="tesoura opcao">
+        <img src="./imagens/tesoura.png" alt="Tesoura">
+      </button>
+    </div>
+
+    <div class="container conteiner-papel" onclick="jogar(papel)">
+      <button value="papel" class="papel opcao">
+        <img src="./imagens/papel.png" alt="Papel">
+      </button>
+    </div>
+
+    <div class="container conteiner-lagarto" onclick="jogar(lagarto)">
+      <button value="lagarto" class="lagarto opcao">
+        <img src="./imagens/lagarto.png" alt="Lagarto">
+      </button>
+    </div>
+
+    <div class="container conteiner-spock" onclick="jogar(spock)">
+      <button value="spock" class="spock opcao">
+        <img src="./imagens/spock.png" alt="Spock">
+      </button>
+    </div>
+  </main>
+
+  <div class="gameplay">
+    <div class="player display">
+      <h2 class="persona">Você Escolheu</h2>
+      <p class="test"></p>
+    </div>
+
+    <p class="result"></p>
+
+    <div class="fim">
+      <div class="acoes">
+        <button onclick="jogarNovamente()" class="playAgain">Jogar Novamente</button>
+        <button onclick="sair()" class="sair-btn">Sair</button>
+      </div>
+    </div>
+
+    <div class="house display">
+      <h2 class="persona">PC Escolheu</h2>
+      <div class="carta-verso" id="verso">?</div>
+      <p class="test1"></p>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>© 2026 Direitos reservados para Alice e Pietra</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

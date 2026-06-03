@@ -1,0 +1,106 @@
+var regras = document.getElementsByClassName("regras")[0];
+
+function mostraregras() {
+    regras.style.display = "flex";
+}
+
+function fecharegras() {
+    regras.style.display = "none";
+}
+
+var jogo = document.getElementsByClassName("jogo")[0];
+var selecao = document.getElementsByClassName("gameplay")[0];
+
+var test = document.getElementsByClassName("test")[0];
+var test1 = document.getElementsByClassName("test1")[0];
+
+var pedra = document.getElementsByClassName("pedra")[0];
+var tesoura = document.getElementsByClassName("tesoura")[0];
+var papel = document.getElementsByClassName("papel")[0];
+var lagarto = document.getElementsByClassName("lagarto")[0];
+var spock = document.getElementsByClassName("spock")[0];
+
+var resultado = document.getElementsByClassName("result")[0];
+var pontuacao = document.getElementsByClassName("pontuacao")[0];
+var playAgain = document.getElementsByClassName("fim")[0];
+var verso = document.getElementById("verso");
+var refs = [pedra, papel, tesoura, lagarto, spock];
+var score = 0;
+
+function jogar(num) {
+    jogo.style.cssText = "animation: opacidade 0.5s linear; animation-direction: reverse;";
+    setTimeout(() => { jogo.style.display = "none"; }, 500);
+    setTimeout(() => { selecao.style.display = "flex"; }, 500);
+
+    selecao.style.cssText = "animation: opacidade 1.5s linear;";
+
+    switch (num) {
+        case pedra: test.innerHTML = pedra.outerHTML; test.value = pedra.value; break;
+        case tesoura: test.innerHTML = tesoura.outerHTML; test.value = tesoura.value; break;
+        case papel: test.innerHTML = papel.outerHTML; test.value = papel.value; break;
+        case lagarto: test.innerHTML = lagarto.outerHTML; test.value = lagarto.value; break;
+        case spock: test.innerHTML = spock.outerHTML; test.value = spock.value; break;
+    }
+
+    var random = Math.floor(Math.random() * 5);
+    var house = refs[random];
+
+    setTimeout(() => {
+        verso.style.display = "none";
+        test1.innerHTML = house.outerHTML;
+        test1.value = house.value;
+        Resolucao();
+    }, 1200);
+}
+
+function Resolucao() {
+    if (
+        test.value == "pedra" && (test1.value == "tesoura" || test1.value == "lagarto") ||
+        test.value == "papel" && (test1.value == "pedra" || test1.value == "spock") ||
+        test.value == "tesoura" && (test1.value == "papel" || test1.value == "lagarto") ||
+        test.value == "lagarto" && (test1.value == "papel" || test1.value == "spock") ||
+        test.value == "spock" && (test1.value == "pedra" || test1.value == "tesoura")
+    ){
+        resultado.innerHTML = "Você Ganhou!";
+        score += 1;
+        pontuacao.innerHTML = score;
+        test.style.cssText = "animation: luzDeFundo 1.5s ease infinite;";
+    }
+    else if (
+        test.value == "tesoura" && test1.value == "pedra" ||
+        test.value == "lagarto" && test1.value == "pedra" ||
+        test.value == "pedra" && test1.value == "papel" ||
+        test.value == "spock" && test1.value == "papel" ||
+        test.value == "papel" && test1.value == "tesoura" ||
+        test.value == "lagarto" && test1.value == "tesoura" ||
+        test.value == "papel" && test1.value == "lagarto" ||
+        test.value == "spock" && test1.value == "lagarto" ||
+        test.value == "pedra" && test1.value == "spock" ||
+        test.value == "tesoura" && test1.value == "spock"
+    ){
+        resultado.innerHTML = "Você Perdeu!";
+        test1.style.cssText = "animation: luzDeFundo 1.5s ease infinite;";
+    }
+    else {
+        resultado.innerHTML = "Empate!";
+        test.style.cssText = "animation: luzDeFundo 1.5s ease infinite;";
+        test1.style.cssText = "animation: luzDeFundo 1.5s ease infinite;";
+    }
+    playAgain.style.display = "flex"; 
+}
+
+function jogarNovamente() {
+    selecao.style.display = "none";
+    jogo.style.display = "flex";
+    verso.style.display = "flex";
+    test.innerHTML = "";
+    test1.innerHTML = "";
+    resultado.innerHTML = "";
+    playAgain.style.display = "none";
+}
+
+function sair() {
+    score = 0;
+    pontuacao.innerHTML = score;
+    location.href = "index.html";
+}
